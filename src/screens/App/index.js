@@ -14,7 +14,7 @@ const App = () => (
   <Router>
     <div className="App">
       <Header />
-      <Route exact path="/" render={() => <Articles />} />
+      <Route path="/" component={Articles} />
       <Footer />
     </div>
   </Router>
