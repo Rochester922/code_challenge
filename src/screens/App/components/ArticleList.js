@@ -1,7 +1,16 @@
 import React from 'react';
+import ArticleListItem from './ArticleListItem';
+
+const renderArticles = articles => (
+  articles.map(article => (
+    <ArticleListItem key={article.id} article={article} />
+  ))
+);
 
 const ArticleList = ({ articles }) => (
-  <pre>{JSON.stringify(articles, null, 2)}</pre>
+  <div>
+    {renderArticles(articles)}
+  </div>
 );
 
 export default ArticleList;
