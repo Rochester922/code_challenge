@@ -1,4 +1,8 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
+import { ArticleListItemType } from '../shared/types';
+
+
 import ArticleListItem from './ArticleListItem';
 
 const renderArticles = articles => (
@@ -12,5 +16,9 @@ const ArticleList = ({ articles }) => (
     {renderArticles(articles)}
   </div>
 );
+
+ArticleList.propTypes = {
+  articles: PropTypes.arrayOf(ArticleListItemType),
+};
 
 export default ArticleList;

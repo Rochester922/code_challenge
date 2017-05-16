@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArticleListItemType } from '../shared/types';
 
 const ArticleListItem = ({ article }) => (
   <div>
@@ -7,5 +8,9 @@ const ArticleListItem = ({ article }) => (
     <div>{article.excerpt}</div>
   </div>
 );
+
+ArticleListItem.propTypes = {
+  article: ArticleListItemType,
+};
 
 export default ArticleListItem;
