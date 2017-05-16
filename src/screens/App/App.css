@@ -1,0 +1,26 @@
+html {
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.app__title {
+  font-family: 'Merriweather', serif;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #57a9d6;
+  color: #fff;
+  margin: 0;
+  padding: 48px 0;
+  font-size: 32px;
+}
+
+.app__footer {
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 24px 0;
+}
