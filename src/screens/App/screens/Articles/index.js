@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ArticleList from './components/ArticleList';
+import Article from './screens/Article';
 import { ARTICLES_QUERY } from './shared/queries';
 
 
@@ -26,7 +27,10 @@ class Articles extends Component {
   // Renders
   render() {
     return (
-      <Route exact path={`${this.props.match.url}`} render={() => <ArticleList articles={this.state.articles} />} />
+      <div>
+        <Route exact path={`${this.props.match.url}`} render={() => <ArticleList articles={this.state.articles} />} />
+        <Route path={`${this.props.match.url}:id`} render={() => <Article />} />
+      </div>
     );
   }
 }
