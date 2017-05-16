@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import request from 'request'; // eslint-disable-line import/no-extraneous-dependencies
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import request from '../../../../shared/request';
 
 import ArticleList from './components/ArticleList';
 import Article from './screens/Article';

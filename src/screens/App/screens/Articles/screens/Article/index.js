@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import request from 'request'; // eslint-disable-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
+
+import request from '../../../../../../shared/request';
 
 import { ARTICLE_QUERY } from './shared/queries';
 import Article from './components/Article';
