@@ -29,7 +29,7 @@ class Articles extends Component {
     return (
       <div>
         <Route exact path={`${this.props.match.url}`} render={() => <ArticleList articles={this.state.articles} />} />
-        <Route path={`${this.props.match.url}:id`} render={() => <Article />} />
+        <Route path={`${this.props.match.url}:id`} component={Article} />
       </div>
     );
   }
