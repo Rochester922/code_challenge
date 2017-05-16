@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import request from '../../shared/request';
 import { ARTICLES_QUERY } from '../../shared/queries';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 class App extends Component {
   // definition
@@ -22,8 +24,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Billin code challenge</h2>
+        <Header />
         <pre>{JSON.stringify(this.state.articles, null, 2)}</pre>
+        <Footer />
       </div>
     );
   }
