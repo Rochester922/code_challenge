@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { articleList } from '../screens/App/screens/Articles/shared/reducer';
+import { articleList, articleDetails } from '../screens/App/screens/Articles/shared/reducer';
 
 const rootReducer = combineReducers({
   articleList,
+  articleDetails,
 });
 
 export default rootReducer;

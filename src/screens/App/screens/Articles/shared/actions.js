@@ -1,5 +1,5 @@
 import request from '../../../../../shared/request';
-import { ARTICLES_QUERY } from './queries';
+import { ARTICLES_QUERY, ARTICLE_QUERY } from './queries';
 
 export const getArticles = () => dispatch => {
   request(ARTICLES_QUERY).then(response => (
@@ -11,5 +11,18 @@ export const getArticles = () => dispatch => {
 
   dispatch({
     type: 'ARTICLES_REQUEST',
+  });
+};
+
+export const getArticle = id => dispatch => {
+  request(ARTICLE_QUERY, { id }).then(response => (
+    dispatch({
+      type: 'ARTICLE_SUCCESS',
+      article: response.data.article,
+    })
+  ));
+
+  dispatch({
+    type: 'ARTICLE_REQUEST',
   });
 };

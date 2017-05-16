@@ -1,35 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import request from '../../../../../../shared/request';
+import { getArticle } from '../../shared/actions';
 
-import { ARTICLE_QUERY } from './shared/queries';
 import Article from './components/Article';
 
 class ArticleWrapper extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      article: null,
-    };
-  }
-
   componentWillMount() {
     const id = this.props.match.params.id;
-    request(ARTICLE_QUERY, { id }).then(response => {
-      this.setState({ article: response.data.article });
-    });
+    this.props.getArticle(id);
   }
 
   render() {
-    const { article } = this.state;
     return (
-      <Article article={article} />
+      <Article {...this.props} />
     );
   }
 }
 
 ArticleWrapper.propTypes = {
+  getArticle: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -37,4 +29,12 @@ ArticleWrapper.propTypes = {
   }),
 };
 
-export default ArticleWrapper;
+const mapStateToProps = ({ articleDetails }, ownProps) => (
+  { article: articleDetails[ownProps.match.params.id] }
+);
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ getArticle }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleWrapper);
