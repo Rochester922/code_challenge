@@ -14,7 +14,9 @@ const App = () => (
   <Router>
     <div className="App">
       <Header />
-      <Route path="/" component={Articles} />
+      <div className="App__content">
+        <Route path="/" component={Articles} />
+      </div>
       <Footer />
     </div>
   </Router>

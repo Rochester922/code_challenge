@@ -1,0 +1,46 @@
+.Article {
+  margin: 32px auto;
+}
+
+.Article__title {
+  font-size: 24px;
+  font-family: Merryweather, serif;
+}
+
+.Article__author {
+  font-size: 18px;
+  margin-top: 8px;
+}
+
+.Article__content {
+  margin-top: 32px;
+}
+
+@media (min-width: 600px) {
+  .Article__title {
+    font-size: 32px;
+  }
+
+  .Article__author {
+    font-size: 20px;
+  }
+
+  .Article__content {
+    font-size: 24px;
+    line-height: 1.4;
+  }
+}
+
+
+.Article__published {
+  margin-top: 16px;
+}
+
+.Article__tags {
+  margin-top: 8px;
+}
+
+.Article__back {
+  margin-top: 32px;
+  display: inline-block;
+}
