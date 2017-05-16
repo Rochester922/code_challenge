@@ -9,11 +9,9 @@ import './ArticleList.css';
 
 const renderArticles = articles => (
   articles.map(article => (
-    <div className="ArticleList__item" key={article.id}>
-      <Link to={`/${article.id}`}>
-        <ArticleListItem article={article} />
-      </Link>
-    </div>
+    <Link to={`/${article.id}`} className="ArticleList__item" key={article.id}>
+      <ArticleListItem article={article} />
+    </Link>
   ))
 );
 
