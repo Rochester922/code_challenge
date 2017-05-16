@@ -1,35 +1,23 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import request from '../../../../shared/request';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import ArticleList from './components/ArticleList';
 import Article from './screens/Article';
-import { ARTICLES_QUERY } from './shared/queries';
+import { getArticles } from './shared/actions';
 
 
 class Articles extends Component {
-  // definition
-  constructor(props) {
-    super(props);
-    this.state = {
-      articles: [],
-    };
-  }
-
-  // lifecycle
   componentWillMount() {
-    request(ARTICLES_QUERY).then(response => {
-      this.setState({ articles: response.data.articles });
-    });
+    this.props.getArticles();
   }
 
-  // Renders
   render() {
     return (
       <div>
-        <Route exact path={`${this.props.match.url}`} render={() => <ArticleList articles={this.state.articles} />} />
+        <Route exact path={`${this.props.match.url}`} render={() => <ArticleList {...this.props} />} />
         <Route path={`${this.props.match.url}:id`} component={Article} />
       </div>
     );
@@ -37,9 +25,14 @@ class Articles extends Component {
 }
 
 Articles.propTypes = {
+  getArticles: PropTypes.func.isRequired,
   match: PropTypes.shape({
     url: PropTypes.string.isRequired,
   }),
 };
 
-export default Articles;
+const mapStateToProps = ({ articleList }) => ({ articles: articleList });
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ getArticles }, dispatch)
+);
+export default connect(mapStateToProps, mapDispatchToProps)(Articles);
