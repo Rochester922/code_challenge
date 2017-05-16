@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
+
+
 import request from '../../shared/request';
 import { ARTICLES_QUERY } from '../../shared/queries';
 import Header from './components/Header';
@@ -25,11 +31,13 @@ class App extends Component {
   // Renders
   render() {
     return (
-      <div className="App">
-        <Header />
-        <ArticleList articles={this.state.articles} />
-        <Footer />
-      </div>
+      <Router>
+        <div className="App">
+          <Header />
+          <Route exact path="/" render={() => <ArticleList articles={this.state.articles} /> } />
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }
