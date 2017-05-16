@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "root": true,
-  "extends": ["airbnb/base"],
+  "extends": ["airbnb-base"],
   "rules": {
     "arrow-body-style": [1, "as-needed"],
     "prefer-arrow-callback": 1,
