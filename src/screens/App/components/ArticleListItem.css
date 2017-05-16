@@ -1,0 +1,22 @@
+.ArticleListItem {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.19), 0 4px 8px rgba(0,0,0,0.23);
+  padding: 16px;
+}
+
+.ArticleListItem__title {
+  font-size: 18px;
+  font-family: Merriweather;
+  font-weight: normal;
+}
+
+.ArticleListItem__author {
+  display: inline-block;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.ArticleListItem__excerpt {
+  margin-top: 24px;
+}

@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
+  color: #333;
 }
 
 *, *:before, *:after {
@@ -13,7 +14,6 @@ html {
   text-align: center;
   background-color: #57a9d6;
   color: #fff;
-  margin: 0;
   padding: 48px 0;
   font-size: 32px;
 }
@@ -23,4 +23,10 @@ html {
   background-color: #333;
   color: #fff;
   padding: 24px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Header = () => (
-  <h2 className="app__title">Billin code challenge!!!</h2>
+  <h1 className="app__title">Billin code challenge!!!</h1>
 );
 
 export default Header;

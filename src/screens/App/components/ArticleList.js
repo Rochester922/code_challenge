@@ -1,18 +1,21 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+
 import { ArticleListItemType } from '../shared/types';
-
-
 import ArticleListItem from './ArticleListItem';
+
+import './ArticleList.css';
 
 const renderArticles = articles => (
   articles.map(article => (
-    <ArticleListItem key={article.id} article={article} />
+    <div className="ArticleList__item" key={article.id}>
+      <ArticleListItem article={article} />
+    </div>
   ))
 );
 
 const ArticleList = ({ articles }) => (
-  <div>
+  <div className="ArticleList">
     {renderArticles(articles)}
   </div>
 );

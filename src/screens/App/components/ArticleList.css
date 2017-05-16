@@ -1,0 +1,21 @@
+.ArticleList {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 24px auto;
+}
+
+.ArticleList__item {
+  padding: 8px;
+}
+
+@media (min-width: 600px) {
+  .ArticleList__item {
+    flex-basis: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ArticleList__item {
+    flex-basis: 25%;
+  }
+}
