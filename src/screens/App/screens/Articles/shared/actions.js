@@ -33,7 +33,7 @@ export const deleteArticle = (id, history) => dispatch => {
 
     return dispatch({
       type: 'ARTICLE_DELETE_SUCCESS',
-      id: response.data.id,
+      id: response.data.articleDelete.id,
     });
   });
 

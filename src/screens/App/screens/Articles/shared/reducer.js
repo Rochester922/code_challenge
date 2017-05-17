@@ -2,6 +2,8 @@ const articleList = (state = [], action) => {
   switch (action.type) {
     case 'ARTICLES_SUCCESS':
       return action.articles;
+    case 'ARTICLE_DELETE_SUCCESS':
+      return state.filter(article => article.id !== action.id);
 
     default:
       return state;
@@ -19,6 +21,13 @@ const articleDetails = (state = {}, action) => {
         { [id]: action.article },
       );
     }
+
+    case 'ARTICLE_DELETE_SUCCESS':
+      return Object.assign(
+        {},
+        state,
+        { [action.id]: undefined },
+      );
 
     default:
       return state;
