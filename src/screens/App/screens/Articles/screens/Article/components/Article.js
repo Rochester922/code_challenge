@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
+
+import ArticleUpdate from './ArticleUpdate';
 
 import './Article.css';
 
-const Article = ({ article, deleteArticle, history }) => (
-  article ?
+const renderArticle = ({ article, deleteArticle, history, match }) => (
+  match.isExact
+  ?
     <div className="Article">
       <Link className="Article__back" to="/">Back</Link>
       <h2 className="Article__title">{article.title}</h2>
@@ -15,23 +18,40 @@ const Article = ({ article, deleteArticle, history }) => (
       <div className="Article__tags"><strong>Tags:</strong> {article.tags && article.tags.join(', ')}</div>
       <div className="Article__actions">
         <button onClick={() => deleteArticle(article.id, history)}>Delete</button>
+        <Link to={`/${article.id}/edit`}>Edit</Link>
       </div>
-    </div> :
-    <div>Loading...</div>
+    </div>
+  : <Route path={`${match.path}/edit`} render={() => <ArticleUpdate {...article} history={history} />} />
 );
 
-Article.propTypes = {
-  article: PropTypes.shape({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    content: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string),
-    published: PropTypes.boolean,
-  }),
+const articleType = PropTypes.shape({
+  title: PropTypes.string,
+  author: PropTypes.string,
+  content: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string),
+  published: PropTypes.boolean,
+});
+
+renderArticle.propTypes = {
+  article: articleType,
   deleteArticle: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }),
+  match: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+  }),
 };
+
+const Article = props => (
+  props.article
+    ? renderArticle(props)
+    : <div>Loading...</div>
+);
+
+Article.propTypes = {
+  article: articleType,
+};
+
 
 export default Article;

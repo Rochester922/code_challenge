@@ -39,3 +39,16 @@ mutation articleCreate($author: String, $content: String, $excerpt: String, $pub
     title
   }
 }`;
+
+export const ARTICLE_UPDATE_MUTATION = `
+mutation articleUpdate($id: String!, $author: String, $content: String, $excerpt: String, $published: Boolean, $tags: [String], $title: String) {
+  articleUpdate(id: $id, author: $author, content: $content, excerpt: $excerpt, published: $published, tags: $tags, title: $title) {
+    id,
+    author
+    content
+    excerpt
+    published
+    tags
+    title
+  }
+}`;

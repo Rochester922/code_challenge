@@ -29,6 +29,11 @@ const articleFields = {
   },
 };
 
+const idField = {
+  type: new GraphQLNonNull(GraphQLString),
+};
+
+
 const articleType = new GraphQLObjectType({
   name: 'Article',
   description: 'This represents a Article',
@@ -43,6 +48,7 @@ const articleType = new GraphQLObjectType({
   ),
 });
 
+
 const Query = new GraphQLObjectType({
   name: 'Query',
   description: 'This is a root query',
@@ -56,9 +62,7 @@ const Query = new GraphQLObjectType({
     article: {
       type: articleType,
       args: {
-        id: {
-          type: new GraphQLNonNull(GraphQLString),
-        },
+        id: idField,
       },
       resolve(post, { id }) {
         return db.Article.findById(id);
@@ -73,9 +77,7 @@ const Mutation = new GraphQLObjectType({
     articleDelete: {
       type: articleType,
       args: {
-        id: {
-          type: new GraphQLNonNull(GraphQLString),
-        },
+        id: idField,
       },
       resolve(value, { id }) {
         return db.Article.findByIdAndRemove(id).exec();
@@ -87,6 +89,17 @@ const Mutation = new GraphQLObjectType({
       resolve(value, input) {
         const article = new db.Article(input);
         return article.save();
+      },
+    },
+    articleUpdate: {
+      type: articleType,
+      args: Object.assign(
+        {},
+        articleFields,
+        { id: idField },
+      ),
+      resolve(value, input) {
+        return db.Article.findByIdAndUpdate(input.id, input);
       },
     },
   }),

@@ -1,5 +1,5 @@
 import request from '../../../../../shared/request';
-import { ARTICLES_QUERY, ARTICLE_QUERY, ARTICLE_DELETE_MUTATION, ARTICLE_CREATE_MUTATION } from './queries';
+import { ARTICLES_QUERY, ARTICLE_QUERY, ARTICLE_DELETE_MUTATION, ARTICLE_CREATE_MUTATION, ARTICLE_UPDATE_MUTATION } from './queries';
 
 export const getArticles = () => dispatch => {
   request(ARTICLES_QUERY).then(response => (
@@ -54,6 +54,22 @@ export const createArticle = (article, history) => dispatch => {
 
     return dispatch({
       type: 'ARTICLE_CREATE_SUCCESS',
+      article: response.data.article,
+    });
+  });
+};
+
+export const updateArticle = (article, history) => dispatch => {
+  dispatch({
+    type: 'ARTICLE_UPDATE_REQUEST',
+    article,
+  });
+
+  request(ARTICLE_UPDATE_MUTATION, article).then(response => {
+    history.push('/');
+
+    return dispatch({
+      type: 'ARTICLE_UPDATE_SUCCESS',
       article: response.data.article,
     });
   });
