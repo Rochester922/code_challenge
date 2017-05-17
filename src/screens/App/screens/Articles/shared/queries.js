@@ -27,3 +27,15 @@ mutation articleDelete($id: String!) {
   }
 }
 `;
+
+export const ARTICLE_CREATE_MUTATION = `
+mutation articleCreate($author: String, $content: String, $excerpt: String, $published: Boolean, $tags: [String], $title: String) {
+  articleCreate(author: $author, content: $content, excerpt: $excerpt, published: $published, tags: $tags, title: $title) {
+    author
+    content
+    excerpt
+    published
+    tags
+    title
+  }
+}`;

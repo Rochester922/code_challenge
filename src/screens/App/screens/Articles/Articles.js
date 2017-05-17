@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 
 import ArticleList from './components/ArticleList';
 import { getArticles } from './shared/actions';
@@ -14,7 +15,10 @@ class Articles extends Component {
 
   render() {
     return (
-      <ArticleList {...this.props} />
+      <div>
+        <div><Link to="/new">Create article</Link></div>
+        <ArticleList {...this.props} />
+      </div>
     );
   }
 }

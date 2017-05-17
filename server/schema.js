@@ -8,32 +8,39 @@ import {
 } from 'graphql';
 import db from './db';
 
+const articleFields = {
+  author: {
+    type: GraphQLString,
+  },
+  content: {
+    type: GraphQLString,
+  },
+  excerpt: {
+    type: GraphQLString,
+  },
+  published: {
+    type: GraphQLBoolean,
+  },
+  tags: {
+    type: new GraphQLList(GraphQLString),
+  },
+  title: {
+    type: GraphQLString,
+  },
+};
+
 const articleType = new GraphQLObjectType({
   name: 'Article',
   description: 'This represents a Article',
-  fields: () => ({
-    author: {
-      type: GraphQLString,
+  fields: () => Object.assign(
+    {},
+    articleFields,
+    {
+      id: {
+        type: GraphQLString,
+      },
     },
-    content: {
-      type: GraphQLString,
-    },
-    excerpt: {
-      type: GraphQLString,
-    },
-    id: {
-      type: GraphQLString,
-    },
-    published: {
-      type: GraphQLBoolean,
-    },
-    tags: {
-      type: new GraphQLList(GraphQLString),
-    },
-    title: {
-      type: GraphQLString,
-    },
-  }),
+  ),
 });
 
 const Query = new GraphQLObjectType({
@@ -72,6 +79,14 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(value, { id }) {
         return db.Article.findByIdAndRemove(id).exec();
+      },
+    },
+    articleCreate: {
+      type: articleType,
+      args: articleFields,
+      resolve(value, input) {
+        const article = new db.Article(input);
+        return article.save();
       },
     },
   }),

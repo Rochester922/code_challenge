@@ -1,0 +1,28 @@
+.ArticleForm {
+  max-width: 600px;
+  margin: 32px 0;
+}
+
+.ArticleForm__title {
+  font-size: 32px;
+  font-weight: 500;
+  font-family: Merryweather, serif;
+  margin-bottom: 32px;
+}
+
+.ArticleForm__label {
+  font-weight: bold;
+}
+
+.ArticleForm__field {
+  margin-top: 16px;
+}
+
+.ArticleForm__text-input {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.ArticleForm__actions {
+  margin-top: 8px;
+}

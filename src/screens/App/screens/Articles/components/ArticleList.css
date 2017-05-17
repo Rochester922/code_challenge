@@ -1,7 +1,7 @@
 .ArticleList {
   display: flex;
   flex-wrap: wrap;
-  margin: 24px auto;
+  margin: 24px -8px;
 }
 
 .ArticleList__item {
