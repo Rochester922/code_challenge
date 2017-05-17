@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getArticle } from '../../shared/actions';
+import { getArticle, deleteArticle } from '../../shared/actions';
 
 import Article from './components/Article';
 
@@ -34,7 +34,7 @@ const mapStateToProps = ({ articleDetails }, ownProps) => (
 );
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ getArticle }, dispatch)
+  bindActionCreators({ getArticle, deleteArticle }, dispatch)
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleWrapper);

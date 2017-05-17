@@ -1,5 +1,5 @@
 import request from '../../../../../shared/request';
-import { ARTICLES_QUERY, ARTICLE_QUERY } from './queries';
+import { ARTICLES_QUERY, ARTICLE_QUERY, ARTICLE_DELETE_MUTATION } from './queries';
 
 export const getArticles = () => dispatch => {
   request(ARTICLES_QUERY).then(response => (
@@ -24,5 +24,19 @@ export const getArticle = id => dispatch => {
 
   dispatch({
     type: 'ARTICLE_REQUEST',
+  });
+};
+
+export const deleteArticle = id => dispatch => {
+  request(ARTICLE_DELETE_MUTATION, { id }).then(response => (
+    dispatch({
+      type: 'ARTICLE_DELETE_SUCCESS',
+      id: response.data.id,
+    })
+  ));
+
+  dispatch({
+    type: 'ARTICLE_DELETE_REQUEST',
+    id,
   });
 };

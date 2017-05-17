@@ -19,3 +19,11 @@ query articleById($id: String!) {
   }
 }
 `;
+
+export const ARTICLE_DELETE_MUTATION = `
+mutation articleDelete($id: String!) {
+  articleDelete(id: $id) {
+    id
+  }
+}
+`;
