@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './Article.css';
 
-const Article = ({ article, deleteArticle }) => (
+const Article = ({ article, deleteArticle, history }) => (
   article ?
     <div className="Article">
       <Link className="Article__back" to="/">Back</Link>
@@ -14,7 +14,7 @@ const Article = ({ article, deleteArticle }) => (
       <div className="Article__published"><strong>Published:</strong> {article.published ? 'Yes' : 'No'}</div>
       <div className="Article__tags"><strong>Tags:</strong> {article.tags && article.tags.join(', ')}</div>
       <div className="Article__actions">
-        <button onClick={() => deleteArticle(article.id)}>Delete</button>
+        <button onClick={() => deleteArticle(article.id, history)}>Delete</button>
       </div>
     </div> :
     <div>Loading...</div>
@@ -29,6 +29,9 @@ Article.propTypes = {
     published: PropTypes.boolean,
   }),
   deleteArticle: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }),
 };
 
 export default Article;

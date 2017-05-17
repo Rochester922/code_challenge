@@ -27,13 +27,15 @@ export const getArticle = id => dispatch => {
   });
 };
 
-export const deleteArticle = id => dispatch => {
-  request(ARTICLE_DELETE_MUTATION, { id }).then(response => (
-    dispatch({
+export const deleteArticle = (id, history) => dispatch => {
+  request(ARTICLE_DELETE_MUTATION, { id }).then(response => {
+    history.push('/');
+
+    return dispatch({
       type: 'ARTICLE_DELETE_SUCCESS',
       id: response.data.id,
-    })
-  ));
+    });
+  });
 
   dispatch({
     type: 'ARTICLE_DELETE_REQUEST',
