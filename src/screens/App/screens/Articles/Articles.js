@@ -27,7 +27,9 @@ Articles.propTypes = {
   getArticles: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ articleList }) => ({ articles: articleList });
+const mapStateToProps = ({ articleList, loadingArticles }) => (
+  { articles: articleList, loading: loadingArticles });
+
 const mapDispatchToProps = dispatch => (
   bindActionCreators({ getArticles }, dispatch)
 );

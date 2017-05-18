@@ -34,7 +34,22 @@ const articleDetails = (state = {}, action) => {
   }
 };
 
+const loadingArticles = (state = false, action) => {
+  switch (action.type) {
+    case 'ARTICLES_REQUEST': {
+      return true;
+    }
+    case 'ARTICLES_FAIL':
+    case 'ARTICLES_SUCCESS': {
+      return false;
+    }
+    default:
+      return state;
+  }
+};
+
 export {
   articleList,
   articleDetails,
+  loadingArticles,
 };

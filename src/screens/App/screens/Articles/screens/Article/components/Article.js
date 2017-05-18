@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, Route } from 'react-router-dom';
 
 import ArticleUpdate from './ArticleUpdate';
+import Loading from '../../../../../../../shared/components/Loading';
 
 import './Article.css';
 
@@ -46,7 +47,7 @@ renderArticle.propTypes = {
 const Article = props => (
   props.article
     ? renderArticle(props)
-    : <div>Loading...</div>
+    : <Loading />
 );
 
 Article.propTypes = {
