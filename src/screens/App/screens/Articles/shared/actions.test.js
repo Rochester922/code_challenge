@@ -12,9 +12,12 @@ import {
   ARTICLE_SUCCESS,
   ARTICLE_DELETE_REQUEST,
   ARTICLE_DELETE_SUCCESS,
+  ARTICLE_CREATE_REQUEST,
+  ARTICLE_CREATE_SUCCESS,
   getArticles,
   getArticle,
   deleteArticle,
+  createArticle,
 } from './actions';
 
 const middlewares = [thunk];
@@ -121,6 +124,56 @@ describe('deleteArticle', () => {
     const history = { push };
 
     return store.dispatch(deleteArticle(1, history))
+      .then(() => {
+        expect(push).toBeCalledWith('/');
+      });
+  });
+});
+
+
+describe('createArticle', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
+
+  it('creates ARTICLE_CREATE_* lifecycle actions', () => {
+    const article = { id: 1 };
+    nock('http://localhost:4000')
+      .post('/graphql')
+      .reply(200, { data: { article } });
+
+    const initialState = [];
+    const store = mockStore(initialState);
+
+    const expected = [
+      { type: ARTICLE_CREATE_REQUEST, article },
+      { type: ARTICLE_CREATE_SUCCESS, article },
+    ];
+
+    const push = jest.fn();
+    const history = { push };
+
+    return store.dispatch(createArticle(article, history))
+      .then(() => {
+        const actual = store.getActions();
+        expect(actual).toEqual(expected);
+      });
+  });
+
+  it('redirects to "/"', () => {
+    const article = { id: 1 };
+    nock('http://localhost:4000')
+      .post('/graphql')
+      .reply(200, { data: { article } });
+
+    const initialState = [];
+    const store = mockStore(initialState);
+
+    const push = jest.fn();
+    const history = { push };
+
+    return store.dispatch(createArticle(1, history))
       .then(() => {
         expect(push).toBeCalledWith('/');
       });
