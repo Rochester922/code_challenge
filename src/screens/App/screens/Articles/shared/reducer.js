@@ -1,8 +1,16 @@
+import {
+  ARTICLES_REQUEST,
+  ARTICLES_SUCCESS,
+  ARTICLES_FAILURE,
+  ARTICLE_SUCCESS,
+  ARTICLE_DELETE_SUCCESS,
+} from './actions';
+
 const articleList = (state = [], action) => {
   switch (action.type) {
-    case 'ARTICLES_SUCCESS':
+    case ARTICLES_SUCCESS:
       return action.articles;
-    case 'ARTICLE_DELETE_SUCCESS':
+    case ARTICLE_DELETE_SUCCESS:
       return state.filter(article => article.id !== action.id);
 
     default:
@@ -12,7 +20,7 @@ const articleList = (state = [], action) => {
 
 const articleDetails = (state = {}, action) => {
   switch (action.type) {
-    case 'ARTICLE_SUCCESS': {
+    case ARTICLE_SUCCESS: {
       const { id } = action.article;
 
       return Object.assign(
@@ -22,7 +30,7 @@ const articleDetails = (state = {}, action) => {
       );
     }
 
-    case 'ARTICLE_DELETE_SUCCESS':
+    case ARTICLE_DELETE_SUCCESS:
       return Object.assign(
         {},
         state,
@@ -36,11 +44,11 @@ const articleDetails = (state = {}, action) => {
 
 const loadingArticles = (state = false, action) => {
   switch (action.type) {
-    case 'ARTICLES_REQUEST': {
+    case ARTICLES_REQUEST: {
       return true;
     }
-    case 'ARTICLES_FAIL':
-    case 'ARTICLES_SUCCESS': {
+    case ARTICLES_FAILURE:
+    case ARTICLES_SUCCESS: {
       return false;
     }
     default:
