@@ -49,18 +49,18 @@ export const getArticle = id => dispatch => {
 };
 
 export const deleteArticle = (id, history) => dispatch => {
-  request(ARTICLE_DELETE_MUTATION, { id }).then(response => {
+  dispatch({
+    type: ARTICLE_DELETE_REQUEST,
+    id,
+  });
+
+  return request(ARTICLE_DELETE_MUTATION, { id }).then(response => {
     history.push('/');
 
     return dispatch({
       type: ARTICLE_DELETE_SUCCESS,
       id: response.data.articleDelete.id,
     });
-  });
-
-  dispatch({
-    type: ARTICLE_DELETE_REQUEST,
-    id,
   });
 };
 
@@ -70,7 +70,7 @@ export const createArticle = (article, history) => dispatch => {
     article,
   });
 
-  request(ARTICLE_CREATE_MUTATION, article).then(response => {
+  return request(ARTICLE_CREATE_MUTATION, article).then(response => {
     history.push('/');
 
     return dispatch({

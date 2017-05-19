@@ -10,8 +10,11 @@ import {
   ARTICLES_SUCCESS,
   ARTICLE_REQUEST,
   ARTICLE_SUCCESS,
+  ARTICLE_DELETE_REQUEST,
+  ARTICLE_DELETE_SUCCESS,
   getArticles,
   getArticle,
+  deleteArticle,
 } from './actions';
 
 const middlewares = [thunk];
@@ -70,6 +73,56 @@ describe('getArticle', () => {
       .then(() => {
         const actual = store.getActions();
         expect(actual).toEqual(expected);
+      });
+  });
+});
+
+
+describe('deleteArticle', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
+
+  it('creates ARTICLE_DELETE_* lifecycle actions', () => {
+    const articleDelete = { id: 1 };
+    nock('http://localhost:4000')
+      .post('/graphql')
+      .reply(200, { data: { articleDelete } });
+
+    const initialState = [];
+    const store = mockStore(initialState);
+
+    const expected = [
+      { type: ARTICLE_DELETE_REQUEST, id: 1 },
+      { type: ARTICLE_DELETE_SUCCESS, id: 1 },
+    ];
+
+    const push = jest.fn();
+    const history = { push };
+
+    return store.dispatch(deleteArticle(1, history))
+      .then(() => {
+        const actual = store.getActions();
+        expect(actual).toEqual(expected);
+      });
+  });
+
+  it('redirects to "/"', () => {
+    const articleDelete = { id: 1 };
+    nock('http://localhost:4000')
+      .post('/graphql')
+      .reply(200, { data: { articleDelete } });
+
+    const initialState = [];
+    const store = mockStore(initialState);
+
+    const push = jest.fn();
+    const history = { push };
+
+    return store.dispatch(deleteArticle(1, history))
+      .then(() => {
+        expect(push).toBeCalledWith('/');
       });
   });
 });
