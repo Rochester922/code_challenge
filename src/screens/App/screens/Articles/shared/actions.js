@@ -87,7 +87,7 @@ export const updateArticle = (article, history) => dispatch => {
   });
 
   return request(ARTICLE_UPDATE_MUTATION, article).then(response => {
-    history.push('/');
+    history.push(`/${response.data.article.id}`);
 
     return dispatch({
       type: ARTICLE_UPDATE_SUCCESS,

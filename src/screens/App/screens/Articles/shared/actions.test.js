@@ -176,7 +176,7 @@ describe('createArticle', () => {
     const push = jest.fn();
     const history = { push };
 
-    return store.dispatch(createArticle(1, history))
+    return store.dispatch(createArticle(article, history))
       .then(() => {
         expect(push).toBeCalledWith('/');
       });
@@ -214,7 +214,7 @@ describe('updateArticle', () => {
       });
   });
 
-  it('redirects to "/"', () => {
+  it('redirects to "/:id"', () => {
     const article = { id: 1 };
     nock('http://localhost:4000')
       .post('/graphql')
@@ -226,9 +226,9 @@ describe('updateArticle', () => {
     const push = jest.fn();
     const history = { push };
 
-    return store.dispatch(updateArticle(1, history))
+    return store.dispatch(updateArticle(article, history))
       .then(() => {
-        expect(push).toBeCalledWith('/');
+        expect(push).toBeCalledWith('/1');
       });
   });
 });
