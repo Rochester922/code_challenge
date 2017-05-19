@@ -36,16 +36,16 @@ export const getArticles = () => dispatch => {
 };
 
 export const getArticle = id => dispatch => {
-  request(ARTICLE_QUERY, { id }).then(response => (
+  dispatch({
+    type: ARTICLE_REQUEST,
+  });
+
+  return request(ARTICLE_QUERY, { id }).then(response => (
     dispatch({
       type: ARTICLE_SUCCESS,
       article: response.data.article,
     })
   ));
-
-  dispatch({
-    type: ARTICLE_REQUEST,
-  });
 };
 
 export const deleteArticle = (id, history) => dispatch => {
