@@ -10,6 +10,7 @@ import {
   ARTICLES_FAILURE,
   ARTICLE_SUCCESS,
   ARTICLE_DELETE_SUCCESS,
+  ARTICLE_CREATE_SUCCESS,
 } from './actions';
 
 describe('articleList', () => {
@@ -52,7 +53,7 @@ describe('articleDetails', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should add article on ARTICLE_SUCESS', () => {
+  it('should add article on ARTICLE_SUCCESS', () => {
     const state = { 1: { id: 1 } };
     const action = {
       type: ARTICLE_SUCCESS,
@@ -65,7 +66,7 @@ describe('articleDetails', () => {
     expect(actual).toEqual(expected);
   });
 
-  it('should remove article on ARTICLE_DELETE_SUCESS', () => {
+  it('should remove article on ARTICLE_DELETE_SUCCESS', () => {
     const state = { 1: { id: 1 }, 2: { id: 2 } };
     const action = {
       type: ARTICLE_DELETE_SUCCESS,
@@ -73,6 +74,19 @@ describe('articleDetails', () => {
     };
     const actual = articleDetails(state, action);
     const expected = { 2: { id: 2 } };
+    expect(actual).toEqual(expected);
+  });
+
+  it('should add article on ARTICLE_CREATE_SUCCESS', () => {
+    const state = { 1: { id: 1 } };
+    const action = {
+      type: ARTICLE_CREATE_SUCCESS,
+      article: {
+        id: 3,
+      },
+    };
+    const actual = articleDetails(state, action);
+    const expected = { 1: { id: 1 }, 3: action.article };
     expect(actual).toEqual(expected);
   });
 });
