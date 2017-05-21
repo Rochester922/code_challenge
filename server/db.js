@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 
 mongoose.connect('mongodb://localhost/billin');
 mongoose.set('debug', true);
+mongoose.Promise = Promise;
 
 const Article = mongoose.model('Article', {
   author: String,
