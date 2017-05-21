@@ -8,7 +8,7 @@ import ArticleList from './components/ArticleList';
 import { getArticles } from './shared/actions';
 
 
-class Articles extends Component {
+export class Articles extends Component {
   componentWillMount() {
     this.props.getArticles();
   }
