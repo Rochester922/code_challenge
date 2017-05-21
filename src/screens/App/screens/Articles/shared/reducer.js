@@ -5,6 +5,7 @@ import {
   ARTICLE_SUCCESS,
   ARTICLE_DELETE_SUCCESS,
   ARTICLE_CREATE_SUCCESS,
+  ARTICLE_UPDATE_SUCCESS,
 } from './actions';
 
 const articleList = (state = [], action) => {
@@ -22,7 +23,8 @@ const articleList = (state = [], action) => {
 const articleDetails = (state = {}, action) => {
   switch (action.type) {
     case ARTICLE_SUCCESS:
-    case ARTICLE_CREATE_SUCCESS: {
+    case ARTICLE_CREATE_SUCCESS:
+    case ARTICLE_UPDATE_SUCCESS: {
       const { id } = action.article;
 
       return Object.assign(

@@ -11,6 +11,7 @@ import {
   ARTICLE_SUCCESS,
   ARTICLE_DELETE_SUCCESS,
   ARTICLE_CREATE_SUCCESS,
+  ARTICLE_UPDATE_SUCCESS,
 } from './actions';
 
 describe('articleList', () => {
@@ -81,6 +82,19 @@ describe('articleDetails', () => {
     const state = { 1: { id: 1 } };
     const action = {
       type: ARTICLE_CREATE_SUCCESS,
+      article: {
+        id: 3,
+      },
+    };
+    const actual = articleDetails(state, action);
+    const expected = { 1: { id: 1 }, 3: action.article };
+    expect(actual).toEqual(expected);
+  });
+
+  it('should update article on ARTICLE_UPDATE_SUCCESS', () => {
+    const state = { 1: { id: 1 } };
+    const action = {
+      type: ARTICLE_UPDATE_SUCCESS,
       article: {
         id: 3,
       },
