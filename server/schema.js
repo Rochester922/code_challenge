@@ -108,7 +108,7 @@ const Mutation = new GraphQLObjectType({
         input: { type: articleUpdateInput },
       },
       resolve(value, { input }) {
-        return db.Article.findByIdAndUpdate(input.id, input);
+        return db.Article.findByIdAndUpdate(input.id, input, { new: true }).exec();
       },
     },
   }),
