@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { createArticle } from '../../../shared/actions';
 
@@ -26,8 +27,7 @@ class ArticleCreate extends React.Component {
         <ArticleForm
           {...this.state}
           formTitle="Create article"
-          onSubmit={createArticle}
-          dispatch={this.props.dispatch}
+          onSubmit={this.props.createArticle}
           history={this.props.history}
         />
       </div>
@@ -36,10 +36,14 @@ class ArticleCreate extends React.Component {
 }
 
 ArticleCreate.propTypes = {
-  dispatch: PropTypes.func,
+  createArticle: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }),
 };
 
-export default connect()(ArticleCreate);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ createArticle }, dispatch)
+);
+
+export default connect(undefined, mapDispatchToProps)(ArticleCreate);

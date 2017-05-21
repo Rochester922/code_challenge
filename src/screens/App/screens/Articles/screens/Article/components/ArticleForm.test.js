@@ -19,17 +19,17 @@ describe('ArticleForm', () => {
       <ArticleForm
         {...article}
         formTitle={'Form title'}
-        dispatch={jest.fn()}
         onSubmit={jest.fn()}
       />,
     );
     const inputNamed = name => wrapper.find(`[name="${name}"]`);
     const valueOf = name => inputNamed(name).props().value;
+    const checkboxValueOf = name => inputNamed(name).props().checked;
 
     expect(valueOf('author')).toEqual(article.author);
     expect(valueOf('title')).toEqual(article.title);
     expect(valueOf('content')).toEqual(article.content);
-    expect(valueOf('published')).toEqual(article.published);
+    expect(checkboxValueOf('published')).toEqual(article.published);
     expect(valueOf('tags')).toEqual('1, 2');
   });
 
@@ -39,14 +39,13 @@ describe('ArticleForm', () => {
         <ArticleForm
           {...article}
           formTitle={'Form title'}
-          dispatch={jest.fn()}
           onSubmit={jest.fn()}
         />
       </MemoryRouter>,
     );
     const inputNamed = name => wrapper.find(`[name="${name}"]`);
     const valueOf = name => inputNamed(name).props().value;
-    const checkboxValueOf = name => inputNamed(name).node.checked;
+    const checkboxValueOf = name => inputNamed(name).props().checked;
     const updateValueOf = (name, value) => {
       const input = inputNamed(name);
       const field = input.node.type === 'checkbox' ? 'checked' : 'value';
@@ -56,8 +55,7 @@ describe('ArticleForm', () => {
     updateValueOf('author', 'author updated');
     updateValueOf('title', 'title updated');
     updateValueOf('content', 'content updated');
-    const checkbox = inputNamed('published');
-    checkbox.simulate('change', { target: { checked: false } });
+    updateValueOf('published', false);
     updateValueOf('tags', 'tag one, tag two');
     expect(valueOf('author')).toEqual('author updated');
     expect(valueOf('title')).toEqual('title updated');
@@ -75,7 +73,6 @@ describe('ArticleForm', () => {
         <ArticleForm
           {...article}
           formTitle={'Form title'}
-          dispatch={jest.fn()}
           onSubmit={onSubmit}
           history={history}
         />
@@ -98,7 +95,6 @@ describe('ArticleForm', () => {
           {...article}
           content={content}
           formTitle={'Form title'}
-          dispatch={jest.fn()}
           onSubmit={onSubmit}
           history={history}
         />

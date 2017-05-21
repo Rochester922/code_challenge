@@ -47,7 +47,7 @@ class ArticleForm extends React.Component {
       delete article.id;
     }
 
-    this.props.dispatch(this.props.onSubmit(article, this.props.history));
+    this.props.onSubmit(article, this.props.history);
   }
 
   render() {
@@ -78,7 +78,7 @@ class ArticleForm extends React.Component {
           </div>
           <div className="ArticleForm__field">
             <label>
-              <input type="checkbox" name="published" value={this.state.published} onChange={this.onInputChange} /> Published
+              <input type="checkbox" name="published" checked={this.state.published} value="published" onChange={this.handleInputChange} /> Published
             </label>
           </div>
           <div className="ArticleForm__actions">
@@ -95,7 +95,6 @@ class ArticleForm extends React.Component {
 ArticleForm.propTypes = {
   author: PropTypes.string,
   content: PropTypes.string,
-  dispatch: PropTypes.func.isRequired,
   formTitle: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,

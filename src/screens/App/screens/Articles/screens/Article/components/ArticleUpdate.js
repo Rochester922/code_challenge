@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { updateArticle } from '../../../shared/actions';
 
@@ -10,9 +11,12 @@ const ArticleUpdate = props => (
     <ArticleForm
       {...props}
       formTitle="Update article"
-      onSubmit={updateArticle}
     />
   </div>
 );
 
-export default connect()(ArticleUpdate);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ onSubmit: updateArticle }, dispatch)
+);
+
+export default connect(undefined, mapDispatchToProps)(ArticleUpdate);
