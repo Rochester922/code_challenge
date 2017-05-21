@@ -7,7 +7,7 @@ import { getArticle, deleteArticle } from '../../shared/actions';
 
 import Article from './components/Article';
 
-class ArticleWrapper extends Component {
+export class ArticleWrapper extends Component {
   componentWillMount() {
     const id = this.props.match.params.id;
     this.props.getArticle(id);
@@ -26,7 +26,7 @@ ArticleWrapper.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
     }),
-  }),
+  }).isRequired,
 };
 
 const mapStateToProps = ({ articleDetails }, ownProps) => (
