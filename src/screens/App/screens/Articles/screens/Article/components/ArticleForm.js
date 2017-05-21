@@ -43,6 +43,10 @@ class ArticleForm extends React.Component {
         excerpt: this.state.content.substring(0, excerptLength),
       },
     );
+    if (!article.id) { // Remove id property when null
+      delete article.id;
+    }
+
     this.props.dispatch(this.props.onSubmit(article, this.props.history));
   }
 

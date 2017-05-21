@@ -47,8 +47,8 @@ mutation articleDelete($id: String!) {
 export const ARTICLE_CREATE_MUTATION = `
 ${ARTICLE_DETAIL_FRAGMENT}
 
-mutation articleCreate($author: String, $content: String, $excerpt: String, $published: Boolean, $tags: [String], $title: String) {
-  articleCreate(author: $author, content: $content, excerpt: $excerpt, published: $published, tags: $tags, title: $title) {
+mutation articleCreate($input: ArticleInput) {
+  articleCreate(input: $input) {
     ...ArticleDetail
   }
 }`;
@@ -56,8 +56,8 @@ mutation articleCreate($author: String, $content: String, $excerpt: String, $pub
 export const ARTICLE_UPDATE_MUTATION = `
 ${ARTICLE_DETAIL_FRAGMENT}
 
-mutation articleUpdate($id: String!, $author: String, $content: String, $excerpt: String, $published: Boolean, $tags: [String], $title: String) {
-  articleUpdate(id: $id, author: $author, content: $content, excerpt: $excerpt, published: $published, tags: $tags, title: $title) {
+mutation articleUpdate($input: ArticleUpdateInput) {
+  articleUpdate(input: $input) {
     ...ArticleDetail
   }
 }`;

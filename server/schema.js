@@ -5,6 +5,7 @@ import {
   GraphQLList,
   GraphQLSchema,
   GraphQLNonNull,
+  GraphQLInputObjectType,
 } from 'graphql';
 import db from './db';
 
@@ -33,18 +34,26 @@ const idField = {
   type: new GraphQLNonNull(GraphQLString),
 };
 
+const articleInput = new GraphQLInputObjectType({
+  name: 'ArticleInput',
+  fields: articleFields,
+});
+
+const articleUpdateInput = new GraphQLInputObjectType({
+  name: 'ArticleUpdateInput',
+  fields: Object.assign(
+    {},
+    articleFields,
+    { id: idField },
+  ),
+});
 
 const articleType = new GraphQLObjectType({
   name: 'Article',
   description: 'This represents a Article',
   fields: () => Object.assign(
-    {},
+    { id: idField },
     articleFields,
-    {
-      id: {
-        type: GraphQLString,
-      },
-    },
   ),
 });
 
@@ -85,20 +94,20 @@ const Mutation = new GraphQLObjectType({
     },
     articleCreate: {
       type: articleType,
-      args: articleFields,
-      resolve(value, input) {
+      args: {
+        input: { type: articleInput },
+      },
+      resolve(value, { input }) {
         const article = new db.Article(input);
         return article.save();
       },
     },
     articleUpdate: {
       type: articleType,
-      args: Object.assign(
-        {},
-        articleFields,
-        { id: idField },
-      ),
-      resolve(value, input) {
+      args: {
+        input: { type: articleUpdateInput },
+      },
+      resolve(value, { input }) {
         return db.Article.findByIdAndUpdate(input.id, input);
       },
     },

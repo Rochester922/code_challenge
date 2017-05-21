@@ -70,7 +70,7 @@ export const createArticle = (article, history) => dispatch => {
     article,
   });
 
-  return request(ARTICLE_CREATE_MUTATION, article).then(response => {
+  return request(ARTICLE_CREATE_MUTATION, { input: article }).then(response => {
     history.push('/');
 
     return dispatch({
@@ -86,7 +86,7 @@ export const updateArticle = (article, history) => dispatch => {
     article,
   });
 
-  return request(ARTICLE_UPDATE_MUTATION, article).then(response => {
+  return request(ARTICLE_UPDATE_MUTATION, { input: article }).then(response => {
     history.push(`/${response.data.articleUpdate.id}`);
 
     return dispatch({
