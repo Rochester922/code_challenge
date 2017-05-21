@@ -78,7 +78,7 @@ class ArticleForm extends React.Component {
             </label>
           </div>
           <div className="ArticleForm__actions">
-            <button>Save</button>
+            <button data-test="submit">Save</button>
             <Link to="/">Cancel</Link>
           </div>
         </form>
