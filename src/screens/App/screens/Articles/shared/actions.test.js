@@ -144,7 +144,7 @@ describe('createArticle', () => {
     const article = { id: 1 };
     nock('http://localhost:4000')
       .post('/graphql')
-      .reply(200, { data: { article } });
+      .reply(200, { data: { articleCreate: article } });
 
     const initialState = [];
     const store = mockStore(initialState);
@@ -168,7 +168,7 @@ describe('createArticle', () => {
     const article = { id: 1 };
     nock('http://localhost:4000')
       .post('/graphql')
-      .reply(200, { data: { article } });
+      .reply(200, { data: { articleCreate: article } });
 
     const initialState = [];
     const store = mockStore(initialState);
@@ -194,7 +194,7 @@ describe('updateArticle', () => {
     const article = { id: 1 };
     nock('http://localhost:4000')
       .post('/graphql')
-      .reply(200, { data: { article } });
+      .reply(200, { data: { articleUpdate: article } });
 
     const initialState = [];
     const store = mockStore(initialState);
@@ -218,7 +218,7 @@ describe('updateArticle', () => {
     const article = { id: 1 };
     nock('http://localhost:4000')
       .post('/graphql')
-      .reply(200, { data: { article } });
+      .reply(200, { data: { articleUpdate: article } });
 
     const initialState = [];
     const store = mockStore(initialState);

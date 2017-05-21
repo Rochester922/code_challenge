@@ -75,7 +75,7 @@ export const createArticle = (article, history) => dispatch => {
 
     return dispatch({
       type: ARTICLE_CREATE_SUCCESS,
-      article: response.data.article,
+      article: response.data.articleCreate,
     });
   });
 };
@@ -87,11 +87,11 @@ export const updateArticle = (article, history) => dispatch => {
   });
 
   return request(ARTICLE_UPDATE_MUTATION, article).then(response => {
-    history.push(`/${response.data.article.id}`);
+    history.push(`/${response.data.articleUpdate.id}`);
 
     return dispatch({
       type: ARTICLE_UPDATE_SUCCESS,
-      article: response.data.article,
+      article: response.data.articleUpdate,
     });
   });
 };
